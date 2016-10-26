@@ -12,7 +12,7 @@
                                 @foreach ($users as $user)
                                     <tbody>
                                     <tr>
-                                        <td><img src="http://bootdey.com/img/Content/user_1.jpg" alt=""></td>
+                                        <td><img height="100 px" src="{{ URL::to('/images/'. $user->image) }}" alt=""></td>
                                     </tr>
                                     <tr>
                                         <td><h3>{{$user->name}}</h3></td>

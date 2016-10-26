@@ -145,7 +145,7 @@
                     <a href="department.html"><i class="fa fa-th-large"></i> Department</a>
                 </li>
                 <li>
-                    <a href="leave.html"><i class="fa fa-plane"></i> Leave Apllications</a>
+                    <a href="{{ url('admin/leaves/create') }}"><i class="fa fa-plane"></i> Leave Apllications</a>
                 </li>
                 <li>
                     <a href="{{ url('admin/promotions') }}"><i class="fa fa-graduation-cap"></i> Promotion</a>

@@ -45,7 +45,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html"><b>&nbsp;&nbsp;&nbsp;HRMS</b></a>
+            <a class="navbar-brand"  href="{{ url('/home') }}"><b>&nbsp;&nbsp;&nbsp;HRMS</b></a>
         </div>
 
         <!-- Top Menu Items -->
@@ -80,7 +80,7 @@
                         <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        <a href="{{ url('admin/settings/user/edit') }}"><i class="fa fa-fw fa-gear"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
                     <li>

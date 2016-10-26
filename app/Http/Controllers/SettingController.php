@@ -42,4 +42,38 @@ class SettingController extends Controller
         return redirect()->back();
 
     }
+
+    public function userEdit(){
+        return view('setting.userEdit');
+    }
+
+    public function updateUserDetail(Request $request){
+        //dd($request->all());
+        $this->validate($request,[
+            "name" => "required",
+            "email" => "required",
+        ]);
+
+        $users=User::find(Auth::user()->id);
+        $users->name=$request->get('name');
+        $users->email=$request->get('email');
+        $users->save();
+
+        return redirect()->back();
+
+    }
+
+    public function updateUserPassword(Request $request){
+        //dd($request->all());
+        $this->validate($request,[
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $users=User::find(Auth::user()->id);
+        $users->password=bcrypt($request->get('password'));
+        $users->save();
+
+        return redirect()->back();
+
+    }
 }

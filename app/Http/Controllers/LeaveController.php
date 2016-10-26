@@ -27,5 +27,7 @@ class LeaveController extends Controller
             $leave->save();
         }
 
+        return redirect()->back();
+
     }
 }

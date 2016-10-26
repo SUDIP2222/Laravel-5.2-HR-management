@@ -13,13 +13,17 @@
         <br/>
         <div class="row">
             <div class="col-lg-12" >
-                {!! Form::open(['url'=>['/admin/employees']]) !!}
+                {!! Form::open(['url'=>['/admin/employees'], 'files' => true]) !!}
                     <div class="row" >
 
                         <div class="col-lg-5 col-lg-offset-1" >
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Personal Details</div>
                                 <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="image">Photo:</label>
+                                        <input type="file" class="form-control" name="image" id="image">
+                                    </div>
 
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                         <label for="name">Name:<span style="color:red;"> *</span></label>

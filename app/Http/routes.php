@@ -15,7 +15,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('home', 'HomeController@index');
 
 });
-Route::group(['middleware' => ['auth','admin']], function () {
+//Route::group(['middleware' => ['auth','admin']], function () {
 //...................................... Employees .....................................
     Route::get('admin/employees', 'EmployeeController@index');
     Route::get('admin/employees/create', 'EmployeeController@create');
@@ -93,12 +93,18 @@ Route::group(['middleware' => ['auth','admin']], function () {
 
     Route::get('admin/dashboard', 'DashboardController@index');
     Route::post('admin/dashboard/notice', 'DashboardController@store');
-//..............................................................................................
+//...................................Admin Setting ............................................
     Route::get('admin/settings/edit', 'SettingController@edit');
     Route::post('admin/settings/updatedetail', 'SettingController@updateDetail');
     Route::post('admin/settings/updatepassword', 'SettingController@updatePassword');
+//..............................................................................................
+
+    Route::get('admin/settings/user/edit', 'SettingController@userEdit');
+    Route::post('admin/settings/user/updatedetail', 'SettingController@updateUserDetail');
+    Route::post('admin/settings/user/updatepassword', 'SettingController@updateuserPassword');
+
 //Route::auth();
-});
+//});
 //login ---------------------------------------
 Route::get('/login', ['uses' => 'AuthController@getLogin', 'middleware' => ['guest']]);
 Route::post('/login', ['uses' => 'AuthController@postLogin', 'middleware' => ['guest']]);
