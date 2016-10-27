@@ -28,7 +28,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Installation
 
-git clone https://github.com/gantoday/laravel-blog.git projectname  
+git clone https://github.com/SUDIP2222/Laravel-5.2-HR-management.git projectname  
 cd projectname  
 composer install  
 create a database and inform .env  
