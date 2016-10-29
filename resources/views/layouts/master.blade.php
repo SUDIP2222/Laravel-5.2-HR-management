@@ -49,9 +49,12 @@
         </div>
 
         <!-- Top Menu Items -->
-        @if (Auth::guest())
-        @else
+
         <ul class="nav navbar-right top-nav">
+            @if (Auth::guest())
+                <li><a href = "{{ URL::to('/login') }}"><span class="glyphicon glyphicon-log-in"></span> Log-in</a></li>
+
+            @else
             <li><a href="{{ url('/home') }}">Home</a></li>
 
             <li class="dropdown">
@@ -88,8 +91,9 @@
                     </li>
                 </ul>
             </li>
-        </ul>
             @endif
+        </ul>
+
     </div>
 </nav>
 

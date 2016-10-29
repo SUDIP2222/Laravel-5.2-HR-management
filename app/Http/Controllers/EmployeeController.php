@@ -103,7 +103,33 @@ class EmployeeController extends Controller
             "accountholder" =>"required",
             'accountnum'=>"required",
         ]);
-        User::find($id)->update($request->all());
+        if(Input::hasFile('image')){
+            $file=Input::file('image');
+            $file->move(public_path().'/images/',$file->getClientOriginalName());
+            // dd($file->getClientOriginalName());
+        }
+        $user=User::find($id);
+        $user->name=$request->get('name');
+        $user->image=$file->getClientOriginalName();
+        $user->date=$request->get('date');
+        $user->gender=$request->get('gender');
+        $user->phone=$request->get('phone');
+        $user->qualification=$request->get('qualification');
+        $user->address=$request->get('address');
+        $user->paddress=$request->get('paddress');
+        $user->email=$request->get('email');
+
+        $user->employeeid=$request->get('employeeid');
+        $user->department=$request->get('department');
+        $user->designation=$request->get('designation');
+        $user->dateofjoining=$request->get('dateofjoining');
+        $user->optradio=$request->get('optradio');
+        $user->Salary=$request->get('Salary');
+        $user->bankname=$request->get('bankname');
+        $user->accountholder=$request->get('accountholder');
+        $user->accountnum=$request->get('accountnum');
+        $user->save();
+        //->update($request->all());
 
         return redirect('admin/employees');
 

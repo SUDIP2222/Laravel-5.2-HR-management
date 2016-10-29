@@ -21,7 +21,9 @@
                         {!! Form::open(['url'=>['admin/leaves'],'autocomplete'=>"off"]) !!}
 
                             <label class="control-label" for="leavetype">Leave Type:</label>
-                            <div class="entry input-group{{ $errors->has('leavetype.*') ? ' has-error' : '' }}">
+                        @if($errors->has())
+                            @foreach ($errors->all() as $error)
+                            <div class="entry input-group{{ $errors->has() ? ' has-error' : '' }}">
                                 <input class="form-control" name="leavetype[]" type="text" id="leavetype" />
                                      <span class="input-group-btn">
                                            <button class="btn btn-success btn-add" type="button">
@@ -30,11 +32,25 @@
                                        </span>
 
                             </div>
-                        @if ($errors->has('leavetype.*'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('leavetype.*') }}</strong>
-                                    </span>
+
+                                <span class="help-block">
+                                    <strong>{{ $error }}</strong>
+                                </span>
+
+                            @endforeach
+                            @else
+                            <div class="entry input-group">
+                                <input class="form-control" name="leavetype[]" type="text" id="leavetype" />
+                                     <span class="input-group-btn">
+                                           <button class="btn btn-success btn-add" type="button">
+                                               <span class="glyphicon glyphicon-plus"></span>
+                                           </button>
+                                     </span>
+                            </div>
                         @endif
+
+
+
                     </div>
 
                     </br>

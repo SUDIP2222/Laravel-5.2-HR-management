@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/',['middleware' => ['guest'], 'uses' => 'HomeController@start']);
 //..................................... Home ..........................................
 Route::group(['middleware' => ['auth']], function () {
     Route::get('home', 'HomeController@index');
@@ -85,7 +86,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('admin/guests/create', 'GuestController@create');
     Route::post('admin/guests', 'GuestController@store');
 //..................................leave......................................................
-
+    Route::get('admin/leaves', 'LeaveController@index');
     Route::get('admin/leaves/create', 'LeaveController@create');
     Route::post('admin/leaves', 'LeaveController@store');
 

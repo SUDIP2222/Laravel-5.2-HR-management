@@ -13,7 +13,7 @@
             <br/>
             <div class="row">
                 <div class="col-lg-12" >
-                    {!! Form::model($user,['method'=>'PATCH','action'=>['EmployeeController@update',$user->id]])!!}
+                    {!! Form::model($user,['method'=>'PATCH','action'=>['EmployeeController@update',$user->id], 'files' => true])!!}
                     {!! csrf_field() !!}
                     <div class="row" >
 
@@ -21,7 +21,11 @@
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Personal Details</div>
                                 <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="image">Photo:</label>
+                                        <input type="file" class="form-control" name="image" id="image">
 
+                                    </div>
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                         <label for="name">Name:<span style="color:red;"> *</span></label>
 

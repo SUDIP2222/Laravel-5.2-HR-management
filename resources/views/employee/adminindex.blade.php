@@ -52,7 +52,7 @@
                                     {{$user->employeeid}}
                                 </td>
                                 <td>
-                                    <img src="http://bootdey.com/img/Content/user_1.jpg" alt="">
+                                <img height="50 px" src="{{ URL::to('/images/'. $user->image) }}" alt="">
                                 </td>
                                 <td>{{$user->name}}</td>
                                 <td>Department: <b> {{$user->department}} </b><br/>Designation: <b> {{$user->designation}} </b> </td>

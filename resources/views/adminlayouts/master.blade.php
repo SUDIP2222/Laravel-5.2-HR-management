@@ -112,20 +112,20 @@
             </li>
 
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                <a  class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Auth::user()->name }} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        <a href="{{ url('/home') }}"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        <a href="{{ url('admin/settings/edit') }}"><i class="fa fa-fw fa-gear"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        <a href="{{ url('/logout') }}"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                     </li>
                 </ul>
             </li>
@@ -145,7 +145,7 @@
                     <a href="department.html"><i class="fa fa-th-large"></i> Department</a>
                 </li>
                 <li>
-                    <a href="{{ url('admin/leaves/create') }}"><i class="fa fa-plane"></i> Leave Apllications</a>
+                    <a href="{{ url('admin/leaves') }}"><i class="fa fa-plane"></i> Leave Apllications</a>
                 </li>
                 <li>
                     <a href="{{ url('admin/promotions') }}"><i class="fa fa-graduation-cap"></i> Promotion</a>

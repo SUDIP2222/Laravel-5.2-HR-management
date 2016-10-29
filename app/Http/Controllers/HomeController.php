@@ -32,4 +32,8 @@ class HomeController extends Controller
         //dd($users);
         return view('employee.index',compact('users','promotions','transfers','suspensions','retirements','notices'));
     }
+
+    public function start(){
+        return view('employee.start');
+    }
 }
