@@ -1,65 +1,56 @@
 @extends('layouts.master')
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Login</div>
-                    <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                            {{ csrf_field() }}
-
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">E-Mail Address</label>
-
-                                <div class="col-md-6">
-                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Password</label>
-
-                                <div class="col-md-6">
-                                    <input type="password" class="form-control" name="password">
-
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="remember"> Remember Me
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-btn fa-sign-in"></i> Login
-                                    </button>
-
-                                    <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="login.html"><b>&nbsp;&nbsp;&nbsp;HRMS</b></a>
         </div>
+
+        <!-- Top Menu Items -->
+
+        <ul class="nav navbar-right top-nav">
+
+            <li>
+                <a href="newjobs.html"><i class="fa fa-list"></i> New Jobs</a>
+            </li>
+        </ul>
     </div>
+</nav>
+
+
+
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+
+        <div class="row wrapper">
+
+            <form action="" method="post" name="Login_Form" class="form-signin">
+                <h3 class="form-signin-heading">Welcome Back! Please Sign In</h3>
+                <hr class="colorgraph"><br>
+
+                <input type="text" class="form-control" name="Username" placeholder="Username" required="" autofocus="" />
+                <input type="password" class="form-control" name="Password" placeholder="Password" required=""/>
+
+                <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>
+            </form>
+            <p>
+
+
+
+        </div>
+
+    </div>
+    <!-- body container -->
+
+</div>
+<!-- /.page wrapper -->
 @endsection

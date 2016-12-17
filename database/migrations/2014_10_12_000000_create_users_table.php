@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('is_a');
+            $table->boolean('status')->default(0);
             $table->string('employeeid');
             $table->string('department');
             $table->string('designation');

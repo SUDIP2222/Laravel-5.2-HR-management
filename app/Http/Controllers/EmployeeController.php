@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
+use App\Designation;
 use App\Employee;
 use App\User;
 use Illuminate\Http\Request;
-
+use App\Message;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 
@@ -14,10 +16,14 @@ class EmployeeController extends Controller
 
     public function index(){
         $users=User::all();
-        return view('employee.adminindex',compact('users'));
+        $messages=Message::limit(5)->get();
+        return view('employee.adminindex',compact('users','messages'));
     }
     public function create(){
-        return view("employee.create");
+        $departments=Department::lists('department','department');
+        $designations=Designation::lists('designation','designation');
+        $messages=Message::limit(5)->get();
+        return view("employee.create",compact('messages','departments','designations'));
     }
 
     public function store(Request $request){
@@ -32,7 +38,7 @@ class EmployeeController extends Controller
             "paddress" => "required",
             "email" => "required",
             "password" => "required",
-            "employeeid" => "required",
+            'image' => 'required | mimes:jpeg,jpg,png',
             "department" => "required",
             "designation" => "required",
             "dateofjoining" => "required",
@@ -43,6 +49,7 @@ class EmployeeController extends Controller
             'accountnum'=>"required",
         ]);
 
+        $employeeId = rand(10000,1000000);
 
         $request['password']= bcrypt($request->get('password'));
         if(Input::hasFile('image')){
@@ -61,7 +68,7 @@ class EmployeeController extends Controller
         $user->paddress=$request->get('paddress');
         $user->email=$request->get('email');
         $user->password=$request->get('password');
-        $user->employeeid=$request->get('employeeid');
+        $user->employeeid=$employeeId;
         $user->department=$request->get('department');
         $user->designation=$request->get('designation');
         $user->dateofjoining=$request->get('dateofjoining');
@@ -77,8 +84,11 @@ class EmployeeController extends Controller
     }
 
     public function edit($id){
+        $departments=Department::lists('department','department');
+        $designations=Designation::lists('designation','designation');
         $user=User::find($id);
-        return view('employee.edit',compact('user'));
+        $messages=Message::limit(5)->get();
+        return view('employee.edit',compact('user','messages','departments','designations'));
     }
 
     public function update(Request $request,$id){
@@ -92,8 +102,7 @@ class EmployeeController extends Controller
             "address" => "required",
             "paddress" => "required",
             "email" => "required",
-
-            "employeeid" => "required",
+            'image' => 'required | mimes:jpeg,jpg,png',
             "department" => "required",
             "designation" => "required",
             "dateofjoining" => "required",
@@ -139,6 +148,33 @@ class EmployeeController extends Controller
         $user=User::findOrFail($id);
         $user->delete();
         return redirect()->back();
+    }
+
+    public function active($id){
+        $applications=User::find($id);
+        //dd($applications);
+        if($applications->count()){
+
+            $applications->optradio=1;
+            if($applications->save()){
+
+                return redirect()->back();
+            }
+        }
+    }
+
+
+    public function pending($id){
+        $applications=User::find($id);
+        //dd($applications);
+        if($applications->count()){
+
+            $applications->optradio=0;
+            if($applications->save()){
+
+                return redirect()->back();
+            }
+        }
     }
 
 

@@ -29,49 +29,51 @@
                                 <tr>
                                     <th><span>EmployeeID</span></th>
                                     <th><span>Name</span></th>
-                                    <th><span>Date</span></th>
+                                    <th><span>From Date</span></th>
+                                    <th><span>To Date</span></th>
                                     <th><span>Leave Type</span></th>
                                     <th><span>Reason</span></th>
-                                    <th><span>Applied Date</span></th>
-                                    <th class="text-center"><span>Status</span></th>
-                                    <th>Action</th>
+                                    <th><span>status</span></th>
+                                    <th class="text-center"><span>Ation</span></th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($applications as $application)
                                 <tr>
+
                                     <td>
-                                        1239870
+                                        {{$application->user->employeeid}}
                                     </td>
-                                    <td>Sadiqur Rahman</td>
-                                    <td>30/7/2016</td>
-                                    <td>personal</td>
-                                    <td>Family</td>
-                                    <td>22/7/2016</td>
-                                    <td class="text-center">
-                                        <span class="label label-default">active</span>
-                                    </td>
+                                    <td>{{$application->user->name}}</td>
+                                    <td>{{$application->leave_from}}</td>
+                                    <td>{{$application->leave_to}}</td>
+                                    <td>{{$application->leave_type}}</td>
+                                    <td>{{$application->leave_reason}}</td>
+                                    @if($application->status)
+                                        <td class="text-center">
+                                            <a href="#"><span class="label label-default">active</span></a>
+                                        </td>
+                                    @else
+                                        <td class="text-center">
+                                            <a href = "{{ URL::to('/applications/active/'.$application->id) }}"><span class="label label-default">pending</span></a>
+                                        </td>
+
+                                    @endif
+
                                     <td class="text-center" style="width: 20%;">
-                                        <a href="#" class="table-link">
-               <span class="fa-stack">
-                   <i class="fa fa-square fa-stack-2x"></i>
-                   <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-               </span>
-                                        </a>
-                                        <a href="#" class="table-link">
-                 <span class="fa-stack">
-                     <i class="fa fa-square fa-stack-2x"></i>
-                     <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                 </span>
-                                        </a>
-                                        <a href="#" class="table-link danger">
+
+                                        <a href = "{{ URL::to('admin/leaves/'.$application->id) }}" class="table-link danger">
                        <span class="fa-stack">
                            <i class="fa fa-square fa-stack-2x"></i>
                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
                        </span>
                                         </a>
                                     </td>
+
                                 </tr>
 
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

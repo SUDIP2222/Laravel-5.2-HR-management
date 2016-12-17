@@ -11,11 +11,30 @@
 |
 */
 Route::get('/',['middleware' => ['guest'], 'uses' => 'HomeController@start']);
+Route::get('/job-post',['middleware' => ['guest'], 'uses' => 'HomeController@jobPost']);
 //..................................... Home ..........................................
 Route::group(['middleware' => ['auth']], function () {
     Route::get('home', 'HomeController@index');
 
 });
+///////////////////////////////////////////////////////////////////////
+
+Route::get('/messages/create','MessageController@create');
+Route::post('/messages','MessageController@store');
+
+//////////////////////////////////////////
+Route::get('/notices', 'NoticeController@show');
+//........................................Leave ........................................
+Route::get('/applications', 'ApplicationController@index');
+Route::get('/applications/create', 'ApplicationController@create');
+Route::post('/applications', 'ApplicationController@store');
+
+
+
+
+
+
+//.......................................................................................
 //Route::group(['middleware' => ['auth','admin']], function () {
 //...................................... Employees .....................................
     Route::get('admin/employees', 'EmployeeController@index');
@@ -24,6 +43,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('admin/employees/{id}/edit', 'EmployeeController@edit');
     Route::patch('admin/employees/{id}', 'EmployeeController@update');
     Route::get('admin/employees/{id}', 'EmployeeController@delete');
+    Route::get('admin/employees/active/{id}', 'EmployeeController@active');
+    Route::get('admin/employees/pending/{id}', 'EmployeeController@pending');
+
 
 //.......................................................................................
 //...................................... Promotion ......................................
@@ -81,14 +103,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('admin/jobs/{id}/edit', 'JobController@edit');
     Route::patch('admin/jobs/{id}', 'JobController@update');
     Route::get('admin/jobs/{id}', 'JobController@delete');
-//..............................................................................................
 
-    Route::get('admin/guests/create', 'GuestController@create');
-    Route::post('admin/guests', 'GuestController@store');
 //..................................leave......................................................
     Route::get('admin/leaves', 'LeaveController@index');
     Route::get('admin/leaves/create', 'LeaveController@create');
     Route::post('admin/leaves', 'LeaveController@store');
+    Route::get('admin/leaves/{id}', 'LeaveController@delete');
+    Route::get('/applications/active/{id}', 'ApplicationController@active');
 
 //...................................Deshboard..................................................
 
@@ -104,10 +125,33 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('admin/settings/user/updatedetail', 'SettingController@updateUserDetail');
     Route::post('admin/settings/user/updatepassword', 'SettingController@updateuserPassword');
 
+//......................................messages................................................
+
+    Route::get('admin/messages', 'MessageController@index');
+
+//--------------------------------------Department ---------------------------------------------
+
+Route::get('admin/departments', 'DepartmentController@index');
+Route::get('admin/departments/create', 'DepartmentController@create');
+Route::post('admin/departments', 'DepartmentController@store');
+Route::get('admin/departments/{id}/edit', 'DepartmentController@edit');
+Route::patch('admin/departments/{id}', 'DepartmentController@update');
+Route::get('admin/departments/{id}', 'DepartmentController@delete');
+
+
+//--------------------------------------designations ---------------------------------------------
+
+Route::get('admin/designations', 'DesignationController@index');
+Route::get('admin/designations/create', 'DesignationController@create');
+Route::post('admin/designations', 'DesignationController@store');
+Route::get('admin/designations/{id}/edit', 'DesignationController@edit');
+Route::patch('admin/designations/{id}', 'DesignationController@update');
+Route::get('admin/designations/{id}', 'DesignationController@delete');
+
 //Route::auth();
 //});
 //login ---------------------------------------
-Route::get('/login', ['uses' => 'AuthController@getLogin', 'middleware' => ['guest']]);
+///Route::get('/login', ['uses' => 'AuthController@getLogin', 'middleware' => ['guest']]);
 Route::post('/login', ['uses' => 'AuthController@postLogin', 'middleware' => ['guest']]);
 
 //logout --------------------------------------

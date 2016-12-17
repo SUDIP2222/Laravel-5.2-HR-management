@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Notice;
 use Illuminate\Http\Request;
-
+use App\Message;
 use App\Http\Requests;
 
 class NoticeController extends Controller
@@ -12,10 +12,19 @@ class NoticeController extends Controller
 
     public function index(){
         $notices=Notice::all();
-        return view('notice.index',compact('notices'));
+        $messages=Message::limit(5)->get();
+        return view('notice.index',compact('notices','messages'));
+    }
+    public function show(){
+
+        $notices=Notice::all();
+
+        return view('notice.show',compact('notices'));
+
     }
     public function create(){
-        return view('notice.create');
+        $messages=Message::limit(5)->get();
+        return view('notice.create',compact('messages'));
     }
 
     public function store(Request $request){
@@ -32,7 +41,8 @@ class NoticeController extends Controller
 
     public function edit($id){
         $notice=Notice::find($id);
-        return view('notice.edit',compact('notice'));
+        $messages=Message::limit(5)->get();
+        return view('notice.edit',compact('notice','messages'));
     }
 
     public function update(Request $request,$id){
@@ -41,6 +51,7 @@ class NoticeController extends Controller
             "notice_title" => "required",
             "description" => "required",
         ]);
+
 
         Notice::find($id)->update($request->all());
 

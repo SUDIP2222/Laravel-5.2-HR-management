@@ -8,19 +8,22 @@ use App\Suspension;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
+use App\Message;
 
 class SuspensionController extends Controller
 {
     public function index(){
         $suspensions=Suspension::all();
-        return view('suspension.index',compact('suspensions'));
+        $messages=Message::limit(5)->get();
+        return view('suspension.index',compact('suspensions','messages'));
     }
     public function create(){
 
         $users=User::selectRaw('CONCAT(employeeid,"(",name,")") as full_name,id')->lists('full_name','id');
+        $messages=Message::limit(5)->get();
         //dd($users);
 
-        return view('suspension.create',compact('users'));
+        return view('suspension.create',compact('users','messages'));
     }
 
 
@@ -34,12 +37,15 @@ class SuspensionController extends Controller
         ]);
 
         $suspentions=Suspension::create($request->all());
+
+        return redirect()->back();
     }
 
     public function edit($id){
         $suspension=Suspension::find($id);
         $users=User::selectRaw('CONCAT(employeeid,"(",name,")") as full_name,id')->lists('full_name','id');
-        return view('suspension.edit',compact('suspension','users'));
+        $messages=Message::limit(5)->get();
+        return view('suspension.edit',compact('suspension','users','messages'));
     }
 
     public function update(Request $request,$id){

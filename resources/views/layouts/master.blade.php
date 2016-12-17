@@ -16,7 +16,8 @@
 
 
     <!-- Custom CSS -->
-    <link href="{{ asset('asset/css/employee.css') }}" rel="stylesheet">
+    {{--<link href="{{ asset('asset/css/employee.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('asset/css/employeeNew.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="{{ asset('asset/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -52,22 +53,28 @@
 
         <ul class="nav navbar-right top-nav">
             @if (Auth::guest())
-                <li><a href = "{{ URL::to('/login') }}"><span class="glyphicon glyphicon-log-in"></span> Log-in</a></li>
+                <li>
+                    <a href="{{ url('/job-post') }}"><i class="fa fa-list"></i> New Jobs</a>
+                </li>
+                <li>
+                    <a href="{{ url('/') }}"><i class="glyphicon glyphicon-log-in"></i> Log-In </a>
+                </li>
 
             @else
+                @if(Auth::user()->is_a==='admin')
+                    <li><a href="{{ url('admin/dashboard') }}">Deshboard</a></li>
+                @endif
             <li><a href="{{ url('/home') }}">Home</a></li>
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plain"></i> Leave <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#"><i class="fa fa-paper-plane"></i> Apply</a>
+                        <a href="{{ url('/applications/create') }}"><i class="fa fa-paper-plane"></i> Apply</a>
                     </li>
+
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-list"></i>Leave List</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart"></i> Leave Status</a>
+                        <a href="{{ url('/applications') }}"><i class="fa fa-bar-chart"></i> Leave Status</a>
                     </li>
                 </ul>
             </li>
@@ -80,7 +87,7 @@
                         <a href="{{ url('/home') }}"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        <a href="{{ url('/messages/create') }}"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                     </li>
                     <li>
                         <a href="{{ url('admin/settings/user/edit') }}"><i class="fa fa-fw fa-gear"></i> Settings</a>
@@ -98,7 +105,9 @@
 </nav>
 
 
+
         @yield('content')
+
 
 
 <script src="{{asset('asset/js/jquery.js')}}"></script>

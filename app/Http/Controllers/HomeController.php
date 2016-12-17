@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Job;
 use App\Notice;
 use App\Promotion;
 use App\Retirement;
@@ -35,5 +36,10 @@ class HomeController extends Controller
 
     public function start(){
         return view('employee.start');
+    }
+
+    public function jobPost(){
+        $jobs=Job::all();
+        return view('job.home',compact('jobs'));
     }
 }

@@ -56,70 +56,42 @@
 
 
         <ul class="nav navbar-right top-nav">
+            <li><a href="{{ url('/home') }}">Home</a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
                 <ul class="dropdown-menu message-dropdown">
-
+                    @foreach($messages as $message)
                     <li class="message-preview">
                         <a href="#">
                             <div class="media">
                                     <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                        <img class="media-object" height="50 px" src="{{ URL::to('/images/'. $message->user->image) }}" alt="">
                                     </span>
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>John Smith</strong>
+                                    <h5 class="media-heading"><strong>{{$message->user->name}}</strong>
                                     </h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> {{$message->created_at->diffForHumans()}}</p>
+                                    <p>{{str_limit(strip_tags($message->body), $limit = 20, $end = '...')}}</p>
                                 </div>
                             </div>
                         </a>
                     </li>
-                    <li class="message-preview">
-                        <a href="#">
-                            <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                <div class="media-body">
-                                    <h5 class="media-heading"><strong>John Smith</strong>
-                                    </h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="message-preview">
-                        <a href="#">
-                            <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                <div class="media-body">
-                                    <h5 class="media-heading"><strong>John Smith</strong>
-                                    </h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
+                    @endforeach
                     <li class="message-footer">
-                        <a href="#">Read All New Messages</a>
+                        <a href="{{ url('/admin/messages') }}">Read All New Messages</a>
                     </li>
                 </ul>
             </li>
 
             <li class="dropdown">
-                <a  class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Auth::user()->name }} <b class="caret"></b></a>
+
+                <a  class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{--sdd--}} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
+
                     <li>
                         <a href="{{ url('/home') }}"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                    </li>
+
                     <li>
                         <a href="{{ url('admin/settings/edit') }}"><i class="fa fa-fw fa-gear"></i> Settings</a>
                     </li>
@@ -141,9 +113,15 @@
                 <li>
                     <a href="{{ url('admin/employees') }}"><i class="fa fa-users"></i> Employees</a>
                 </li>
+
                 <li>
-                    <a href="department.html"><i class="fa fa-th-large"></i> Department</a>
+                    <a href="{{ url('admin/departments') }}"><i class="fa fa-plane"></i> Departments</a>
                 </li>
+
+                <li>
+                    <a href="{{ url('admin/designations') }}"><i class="fa fa-plane"></i> Designations</a>
+                </li>
+
                 <li>
                     <a href="{{ url('admin/leaves') }}"><i class="fa fa-plane"></i> Leave Apllications</a>
                 </li>
@@ -168,12 +146,6 @@
                         <li>
                             <a  href="{{ url('admin/jobs') }}">Job openings</a>
                         </li>
-                        <li>
-                            <a href="jobapplications.html">Job applications</a>
-                        </li>
-                        <li>
-                            <a  href="{{ url('admin/guests/create') }}">Guest notice</a>
-                        </li>
                     </ul>
                 </li>
                 <li>
@@ -183,6 +155,7 @@
         </div>
         <!-- /.navbar-collapse -->
     </nav>
+
 
     @yield('content')
     <!-- /#wrapper -->

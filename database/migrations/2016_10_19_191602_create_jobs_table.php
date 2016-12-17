@@ -16,7 +16,10 @@ class CreateJobsTable extends Migration
             $table->increments('id');
             $table->string('position');
             $table->text('description');
+            $table->string('contact');
+            $table->string('address');
             $table->date('post_date');
+
             $table->date('last_date_to_apply');
             $table->date('close_date');
             $table->timestamps();

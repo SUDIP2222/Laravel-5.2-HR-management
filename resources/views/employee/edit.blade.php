@@ -21,10 +21,14 @@
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Personal Details</div>
                                 <div class="panel-body">
-                                    <div class="form-group">
+                                    <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
                                         <label for="image">Photo:</label>
-                                        <input type="file" class="form-control" name="image" id="image">
-
+                                        <input type="file" class="form-control"  name="image" id="image">
+                                        @if ($errors->has('image'))
+                                            <span class="help-block">
+                                                  <strong>{{ $errors->first('image') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                         <label for="name">Name:<span style="color:red;"> *</span></label>
@@ -115,19 +119,13 @@
                             <div class="panel panel-red">
                                 <div class="panel-heading">Company Details</div>
                                 <div class="panel-body">
-                                    <div class="form-group{{ $errors->has('employeeid') ? ' has-error' : '' }}">
-                                        <label for="employeeid">EmployeeID:</label>
 
-                                        {!! Form::text('employeeid',null,['class'=>'form-control','placeholder'=>'Enter Gender']) !!}
-                                        @if ($errors->has('employeeid'))
-                                            <span class="help-block">
-                                                  <strong>{{ $errors->first('employeeid') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
+
+                                        {!! Form::hidden('employeeid',null,['class'=>'form-control','placeholder'=>'Enter Gender']) !!}
+
                                     <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
                                         <label for="department">Department:</label>
-                                        {!! Form::text('department',null,['class'=>'form-control','placeholder'=>'Enter Gender']) !!}
+                                        {!!Form::select('department',$departments,null,['class'=>'form-control','multiple'])!!}
                                         @if ($errors->has('department'))
                                             <span class="help-block">
                                                   <strong>{{ $errors->first('department') }}</strong>
@@ -136,7 +134,7 @@
                                     </div>
                                     <div class="form-group{{ $errors->has('designation') ? ' has-error' : '' }}">
                                         <label for="Designation">Designation:</label>
-                                        {!! Form::text('designation',null,['class'=>'form-control','placeholder'=>'Enter Gender']) !!}
+                                        {!!Form::select('designation',$designations,null,['class'=>'form-control','multiple'])!!}
                                         @if ($errors->has('designation'))
                                             <span class="help-block">
                                                   <strong>{{ $errors->first('designation') }}</strong>
@@ -209,12 +207,6 @@
 
                     <div class="row" >
                         <div class="col-lg-10 col-lg-offset-1" >
-                            <div class="panel panel-yellow">
-                                <div class="panel-heading">Documents</div>
-                                <div class="panel-body">
-
-                                </div>
-                            </div>
 
                             <button type="submit" class="btn btn-success rite">Submit</button>
                         </div>

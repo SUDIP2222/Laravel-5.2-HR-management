@@ -19,13 +19,6 @@
             </div>
             <br/>
 
-            <div class="row" >
-                <div class="col-lg-12" >
-                    <form role="form" id="searchbox" >
-                        <input type="text" class="form-control" placeholder="Search">
-                    </form>
-                </div>
-            </div>
             </br>
             <div class="row">
                 <div class="col-lg-12">
@@ -62,11 +55,11 @@
                                 </td>
                                 @if($user->optradio)
                                 <td class="text-center">
-                                    <span class="label label-default">active</span>
+                                    <a href = "{{ URL::to('admin/employees/pending/'.$user->id) }}"><span class="label label-default">active</span></a>
                                 </td>
                                     @else
                                         <td class="text-center">
-                                            <span class="label label-default">pending</span>
+                                            <a href = "{{ URL::to('admin/employees/active/'.$user->id) }}"><span class="label label-default">pending</span></a>
                                         </td>
 
                                     @endif

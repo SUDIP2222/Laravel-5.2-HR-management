@@ -6,11 +6,12 @@ use App\User;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests;
-
+use App\Message;
 class SettingController extends Controller
 {
     public function edit(){
-        return view('setting.edit');
+        $messages=Message::limit(5)->get();
+        return view('setting.edit',compact('messages'));
     }
 
     public function updateDetail(Request $request){
@@ -44,7 +45,8 @@ class SettingController extends Controller
     }
 
     public function userEdit(){
-        return view('setting.userEdit');
+        $messages=Message::limit(5)->get();
+        return view('setting.userEdit',compact('messages'));
     }
 
     public function updateUserDetail(Request $request){

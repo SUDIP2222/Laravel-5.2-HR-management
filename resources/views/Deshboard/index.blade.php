@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="employees.html">
+                        <a href="{{ url('admin/employees') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -36,28 +36,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-th-large fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">07</div>
-                                    <div>Total Departments</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="department.html">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-yellow">
                         <div class="panel-heading">
@@ -66,12 +45,12 @@
                                     <i class="fa fa-coffee fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
+                                    <div class="huge">{{$totaljob}}</div>
                                     <div>Job Applications</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="jobapplications.html">
+                        <a href="{{ url('admin/jobs') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -88,12 +67,12 @@
                                     <i class="fa fa-plane fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">02</div>
+                                    <div class="huge">{{$app}}</div>
                                     <div>Leave Applications</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="leave.html">
+                        <a href="{{ url('admin/leaves') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

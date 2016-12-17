@@ -9,11 +9,11 @@ use App\Http\Requests;
 class AuthController extends Controller
 {
 
-    public function getLogin(){
-        return view('user.login');
-    }
+
 
     public function postLogin(Request $request){
+
+        //dd("sdsdsds");
         $this->validate($request,[
             'email'=>'required',
             'password'=>'required',
@@ -21,6 +21,7 @@ class AuthController extends Controller
 
         if(!Auth::attempt(['email' =>$request->input('email'), 'password' =>$request->input('password')],$request->has('remember'))){
 
+            \Session::flash('flash_message','Your post has been saved !!!');
             return redirect()->back();
         }
 
@@ -29,6 +30,6 @@ class AuthController extends Controller
 
     public function getLogout(){
         Auth::logout();
-        return redirect('/login');
+        return redirect('/');
     }
 }

@@ -231,37 +231,14 @@
                             <p>{{str_limit(strip_tags($notice->description), $limit = 95, $end = '...')}}</p>
                             <hr>
                             @endforeach
-                            <a href="#" class="btn btn-info btn-block" role="button">Read More</a>
+
+                            <a href="{{ url('/notices') }}" class="btn btn-info btn-block" role="button">Read More</a>
 
                         </div>
                     </div>
                     <!-- Notice board -->
 
-                    <div class="panel panel-danger">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Leave</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <tbody>
-                                    <tr>
-                                        <td>3326</td>
-                                        <td>10/21/2013</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3325</td>
-                                        <td>10/21/2013</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3324</td>
-                                        <td>10/21/2013</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- Leave -->
 
 

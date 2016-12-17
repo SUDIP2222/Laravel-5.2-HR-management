@@ -6,21 +6,22 @@ use App\Transfer;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
-
+use App\Message;
 class TransferController extends Controller
 {
 
     public function index(){
         $transfers=Transfer::all();
-        return view('transfer.index',compact('transfers'));
+        $messages=Message::limit(5)->get();
+        return view('transfer.index',compact('transfers','messages'));
     }
 
     public function create(){
 
         $users=User::selectRaw('CONCAT(employeeid,"(",name,")") as full_name,id')->lists('full_name','id');
         //dd($users);
-
-        return view('transfer.create',compact('users'));
+        $messages=Message::limit(5)->get();
+        return view('transfer.create',compact('users','messages'));
     }
 
     public function store(Request $request){
@@ -41,7 +42,8 @@ class TransferController extends Controller
     public function edit($id){
         $transfer=Transfer::find($id);
         $users=User::selectRaw('CONCAT(employeeid,"(",name,")") as full_name,id')->lists('full_name','id');
-        return view('transfer.edit',compact('transfer','users'));
+        $messages=Message::limit(5)->get();
+        return view('transfer.edit',compact('transfer','users','messages'));
     }
 
     public function update(Request $request,$id){

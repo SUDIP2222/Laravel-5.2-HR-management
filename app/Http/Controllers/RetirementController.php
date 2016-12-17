@@ -7,20 +7,23 @@ use App\Suspension;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
+use App\Message;
 
 class RetirementController extends Controller
 {
 
     public function index(){
         $retirements=Retirement::all();
-        return view('retirement.index',compact('retirements'));
+        $messages=Message::limit(5)->get();
+        return view('retirement.index',compact('retirements','messages'));
     }
     public function create(){
 
         $users=User::selectRaw('CONCAT(employeeid,"(",name,")") as full_name,id')->lists('full_name','id');
+        $messages=Message::limit(5)->get();
         //dd($users);
 
-        return view('retirement.create',compact('users'));
+        return view('retirement.create',compact('users','messages'));
     }
 
     public function store(Request $request){
@@ -41,8 +44,9 @@ class RetirementController extends Controller
 
     public function edit($id){
         $retirement=Retirement::find($id);
+        $messages=Message::limit(5)->get();
         $users=User::selectRaw('CONCAT(employeeid,"(",name,")") as full_name,id')->lists('full_name','id');
-        return view('retirement.edit',compact('retirement','users'));
+        return view('retirement.edit',compact('retirement','users','messages'));
     }
 
     public function update(Request $request,$id){

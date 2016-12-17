@@ -6,21 +6,22 @@ use App\Promotion;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
-
+use App\Message;
 class PromotionController extends Controller
 {
 
     public function index(){
         $promotions =Promotion::all();
        // dd($promotions);
-        return view('promotion.index',compact('promotions'));
+        $messages=Message::limit(5)->get();
+        return view('promotion.index',compact('promotions','messages'));
     }
     public function create(){
 
         $users=User::selectRaw('CONCAT(employeeid,"(",name,")") as full_name,id')->lists('full_name','id');
-
+        $messages=Message::limit(5)->get();
         //dd($users);
-        return view('promotion.create',compact('users'));
+        return view('promotion.create',compact('users','messages'));
     }
 
     public function store(Request $request){
@@ -44,7 +45,8 @@ class PromotionController extends Controller
     public function edit($id){
         $promotion=Promotion::find($id);
         $users=User::selectRaw('CONCAT(employeeid,"(",name,")") as full_name,id')->lists('full_name','id');
-        return view('promotion.edit',compact('promotion','users'));
+        $messages=Message::limit(5)->get();
+        return view('promotion.edit',compact('promotion','users','messages'));
     }
 
     public function update(Request $request,$id){

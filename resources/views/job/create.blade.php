@@ -72,6 +72,29 @@
                         @endif
                     </div>
 
+                    <div class="form-group{{ $errors->has('contact') ? ' has-error' : '' }}">
+                        <label for="name">Position:<span style="color:red;"> *</span></label>
+
+                        {!! Form::text('contact',null,['class'=>'form-control','placeholder'=>'Enter Contact']) !!}
+
+                        @if ($errors->has('contact'))
+                            <span class="help-block">
+                                    <strong>{{ $errors->first('contact') }}</strong>
+                                </span>
+                        @endif
+                    </div>
+                    <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                        <label for="name">Position:<span style="color:red;"> *</span></label>
+
+                        {!! Form::text('address',null,['class'=>'form-control','placeholder'=>'Enter Address']) !!}
+
+                        @if ($errors->has('address'))
+                            <span class="help-block">
+                                    <strong>{{ $errors->first('address') }}</strong>
+                                </span>
+                        @endif
+                    </div>
+
                         <button type="submit" class="btn btn-success rite">Submit</button>
 
                     {!! Form::close() !!}

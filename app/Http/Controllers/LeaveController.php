@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Application;
 use App\Leave;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests;
-
+use App\Message;
 class LeaveController extends Controller
 {
     public function index(){
-        return view('leave.index');
+        $applications=Application::all();
+        $messages=Message::limit(5)->get();
+        return view('leave.index',compact('messages','applications'));
     }
     public function create(){
-        return view('leave.create');
+
+        $messages=Message::limit(5)->get();
+        return view('leave.create',compact('messages'));
     }
 
     public function store(Request $request){
@@ -46,6 +51,14 @@ class LeaveController extends Controller
             $leave->save();
         }
 
+        return redirect()->back();
+
+    }
+
+    public function delete($id){
+
+        $notice=Application::findOrFail($id);
+        $notice->delete();
         return redirect()->back();
 
     }
